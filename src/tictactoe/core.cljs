@@ -1,10 +1,12 @@
 (ns ^:figwheel-always tictactoe.core
   (:require [reagent.core :as reagent :refer [atom]]
-            [cljs.test :refer-macros [deftest is]]))
+            [cljs.test :refer-macros [deftest is]]
+            [tictactoe.bot :refer [move]]))
 
 (enable-console-print!)
 
 (defn new-board [n]
+  ;[["C" "P" "B"]["B" "B" "B"]["B" "B" "B"]])
   (vec (repeat n (vec (repeat n "B")))))
 
 (def board-size 3)
@@ -72,7 +74,7 @@
 
 (defn check-game-status [state]
   (-> state
-      (update-in [:board] computer-move)
+      (update-in [:board] move)
       (update-status)))
 
 (defn blank [i j]
